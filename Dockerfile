@@ -1,6 +1,6 @@
 # Stage 1: Compile and Build angular codebase
 
-# Use official node image as the base image
+# Use official node image as the build image
 FROM node:latest AS build_container
 
 # Set the working directory
@@ -18,8 +18,8 @@ RUN npm run build -- --configuration=production
 
 # Stage 2: Serve app with nginx server
 
-# Use official nginx image as the base image
-FROM node:latest AS run_container
+# Use official node image as the runtime image
+FROM node:latest
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=build_container /usr/local/app/dist/ssrdemo /usr/local/ssrdemo
