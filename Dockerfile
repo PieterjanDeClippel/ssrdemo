@@ -25,10 +25,10 @@ FROM node:latest
 COPY --from=build_container /usr/local/app/dist/ssrdemo /usr/local/ssrdemo
 
 # Expose port 80
-EXPOSE 80:5000
-ENV PORT=5000
+EXPOSE 80
+ENV PORT=80
 
-RUN node /usr/local/ssrdemo/server/server.mjs
+ENTRYPOINT ["node", "/usr/local/ssrdemo/server/server.mjs"]
 
 # docker build --tag 'ng-ssr-demo' .
 # docker run -p 80 ng-ssr-demo
